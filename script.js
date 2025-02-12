@@ -1,28 +1,11 @@
-let gridSize = 21; // Default grid size
+const gridSize = 25; // Fixed grid size (version 2)
 const grid = document.getElementById('grid');
 const resetButton = document.getElementById('resetButton');
-const updateGridButton = document.getElementById('updateGridButton');
-const gridSizeInput = document.getElementById('gridSize');
-
-// Function to calculate alignment pattern positions
-function getAlignmentPatternPositions(version) {
-  if (version < 2) return []; // No alignment patterns for version 1
-  const positions = [6]; // Always include position 6
-  const numAlignments = Math.floor(version / 7) + 1;
-  const step = Math.floor((gridSize - 13) / (numAlignments - 1));
-  for (let i = 1; i < numAlignments; i++) {
-    positions.push(6 + i * step);
-  }
-  return positions;
-}
 
 // Create the grid
 function createGrid() {
   grid.innerHTML = ''; // Clear existing grid
   grid.style.gridTemplateColumns = `repeat(${gridSize}, 20px)`; // Set grid columns
-
-  const version = Math.floor((gridSize - 21) / 4) + 1; // Calculate QR code version
-  const alignmentPositions = getAlignmentPatternPositions(version);
 
   for (let i = 0; i < gridSize * gridSize; i++) {
     const cell = document.createElement('div');
@@ -55,15 +38,13 @@ function createGrid() {
       }
     }
 
-    // Add Alignment Patterns
-    alignmentPositions.forEach((pos) => {
-      if (
-        (row >= pos - 2 && row <= pos + 2 && col >= pos - 2 && col <= pos + 2) && // 5x5 square
-        !(row >= pos - 1 && row <= pos + 1 && col >= pos - 1 && col <= pos + 1) // Exclude inner 3x3 square
-      ) {
-        cell.classList.add('black');
-      }
-    });
+    // Add Alignment Pattern (fixed at position 18, 18)
+    if (
+      (row >= 16 && row <= 20 && col >= 16 && col <= 20) && // 5x5 square
+      !(row >= 17 && row <= 19 && col >= 17 && col <= 19) // Exclude inner 3x3 square
+    ) {
+      cell.classList.add('black');
+    }
 
     cell.addEventListener('click', () => {
       cell.classList.toggle('black');
@@ -75,17 +56,6 @@ function createGrid() {
 // Reset the grid
 resetButton.addEventListener('click', () => {
   createGrid();
-});
-
-// Update grid size
-updateGridButton.addEventListener('click', () => {
-  const newSize = parseInt(gridSizeInput.value);
-  if (newSize >= 21 && newSize <= 40) {
-    gridSize = newSize;
-    createGrid();
-  } else {
-    alert('Grid size must be between 21 and 40.');
-  }
 });
 
 // Initialize the grid
