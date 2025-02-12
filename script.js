@@ -13,15 +13,31 @@ function createGrid() {
     const cell = document.createElement('div');
     cell.classList.add('cell');
 
-    // Add corner squares automatically
     const row = Math.floor(i / gridSize);
     const col = i % gridSize;
+
+    // Add Position Detection Patterns (corner squares)
     if (
       (row < 7 && col < 7) || // Top-left corner
       (row < 7 && col >= gridSize - 7) || // Top-right corner
       (row >= gridSize - 7 && col < 7) // Bottom-left corner
     ) {
-      cell.classList.add('black');
+      if (
+        (row === 0 || row === 6 || col === 0 || col === 6) || // Outer border
+        (row >= 2 && row <= 4 && col >= 2 && col <= 4) // Inner square
+      ) {
+        cell.classList.add('black');
+      }
+    }
+
+    // Add Timing Patterns (alternating black and white modules)
+    if (
+      (row === 6 && col >= 7 && col < gridSize - 7) || // Horizontal timing pattern
+      (col === 6 && row >= 7 && row < gridSize - 7) // Vertical timing pattern
+    ) {
+      if ((row + col) % 2 === 0) {
+        cell.classList.add('black');
+      }
     }
 
     cell.addEventListener('click', () => {
