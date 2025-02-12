@@ -14,11 +14,6 @@ A simple and interactive grid editor for creating custom QR codes. Toggle cells 
 3. Click on the grid to toggle cells between black and white.
 4. Use the "Reset Grid" button to clear the grid and start over.
 
-## Hosting on GitHub Pages
-1. Clone this repository.
-2. Push the files to your GitHub repository.
-3. Enable GitHub Pages in the repository settings.
-
 ## Live Demo
 Check out the live demo [here](https://your-username.github.io/your-repo-name).
 
