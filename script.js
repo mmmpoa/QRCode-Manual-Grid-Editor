@@ -21,7 +21,8 @@ function createGrid() {
   grid.innerHTML = ''; // Clear existing grid
   grid.style.gridTemplateColumns = `repeat(${gridSize}, 20px)`;
 
-  const alignmentPositions = getAlignmentPatternPositions(Math.floor((gridSize - 21) / 4 + 1));
+  const version = Math.floor((gridSize - 21) / 4) + 1;
+  const alignmentPositions = getAlignmentPatternPositions(version);
 
   for (let i = 0; i < gridSize * gridSize; i++) {
     const cell = document.createElement('div');
