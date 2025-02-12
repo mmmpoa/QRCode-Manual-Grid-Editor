@@ -19,9 +19,9 @@ function getAlignmentPatternPositions(version) {
 // Create the grid
 function createGrid() {
   grid.innerHTML = ''; // Clear existing grid
-  grid.style.gridTemplateColumns = `repeat(${gridSize}, 20px)`;
+  grid.style.gridTemplateColumns = `repeat(${gridSize}, 20px)`; // Set grid columns
 
-  const version = Math.floor((gridSize - 21) / 4) + 1;
+  const version = Math.floor((gridSize - 21) / 4) + 1; // Calculate QR code version
   const alignmentPositions = getAlignmentPatternPositions(version);
 
   for (let i = 0; i < gridSize * gridSize; i++) {
